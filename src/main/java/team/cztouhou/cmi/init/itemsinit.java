@@ -6,9 +6,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.food.FoodProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import team.cztouhou.cmi.Main;
+import team.cztouhou.cmi.item.ingredients;
 
 public class itemsinit {
     public static final Logger LOGGER = LoggerFactory.getLogger("cmi");
@@ -21,8 +23,11 @@ public class itemsinit {
 
 
 
-    public static final RegistryObject<Item> testitem = register("testitem",
-            () -> new Item(new Item.Properties().tab(Main.MAIN_TAB)));
+    public static final RegistryObject<ingredients> testitem = register("testitem",
+            () -> new ingredients(new Item.Properties().tab(Main.MAIN_TAB)
+                    .food(new FoodProperties.Builder().nutrition(4)
+                    .saturationMod(2.5F)
+                    .build())));
 
 
 
@@ -30,6 +35,6 @@ public class itemsinit {
 
     static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> item) {
         LOGGER.info("register item:"+name);
-        return itemsinit.ITEMS.register(name, item);
+        return ITEMS.register(name, item);
     }
 }
